@@ -20,7 +20,7 @@ public class Main {
         float total_ticket=0;
 
         //Variable des plats/Qté/Prix pour affichage du ticket
-        String produits = "Produit | Quantité | Prix total";
+        String produits = "Quantité | Produit  | Prix total \n -----------------------------------------------";
 
         //Lancement du nouveau Ticket de caisse
         System.out.println("Nouveau Ticket de caisse.");
@@ -40,8 +40,8 @@ public class Main {
             //Tant que le nombre de plat n'est pas atteint, on demande la saisie d'un nouveau plat
             System.out.println("Entrez l'intitulé du plat: ");
             plat = sc.nextLine();
-            if (plat == "") {
-                i++;
+            if (plat.equals("")) {
+                ++i;
                 break;
             }
 
@@ -56,19 +56,25 @@ public class Main {
             sc.nextLine();
 
             //Stockage de la liste des produits
-            produits = produits + "\n" + plat + " | " + quantite + " | " + (prix_unitaire * quantite) + " €";
+            produits = produits + "\n X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €";
 
             //Calcul du total
             total_ticket = total_ticket + (prix_unitaire * quantite);
 
         }
 
+        //Test du contenu du ticket
+        if (total_ticket == 0){
+            System.out.println("Le Ticket est vide, abandon de l'impression");
+        }
+        else {
+            //Affichage des plats
+            System.out.println(produits);
 
-        //Affichage des plats
-        System.out.println(produits);
+            //Affichage du total de la commande
+            System.out.println("----------------------------------------------- \n Total de la commande: " + total_ticket + " €");
+        }
 
-        //Affichage du total de la commande
-        System.out.println("\n Total de la commande: " + total_ticket + " €");
 
         // On ferme le scanner
         sc.close();
