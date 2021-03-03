@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -19,8 +20,12 @@ public class Main {
         //Variable Total de l'adition
         float total_ticket=0;
 
-        //Variable des plats/Qté/Prix pour affichage du ticket
-        String produits = "Quantité | Produit  | Prix total \n -----------------------------------------------";
+        //Utilisation d'un tavleau de type liste
+        ArrayList<String> plats = new ArrayList<String>();
+
+        //Ajout de la ligne d'entête
+        plats.add("Quantité | Produit  | Prix total");
+        plats.add("-----------------------------------------------");
 
         //Lancement du nouveau Ticket de caisse
         System.out.println("Nouveau Ticket de caisse.");
@@ -56,7 +61,8 @@ public class Main {
             sc.nextLine();
 
             //Stockage de la liste des produits
-            produits = produits + "\n X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €";
+            //produits = produits + "\n X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €";
+            plats.add("X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €");
 
             //Calcul du total
             total_ticket = total_ticket + (prix_unitaire * quantite);
@@ -68,13 +74,13 @@ public class Main {
             System.out.println("Le Ticket est vide, abandon de l'impression");
         }
         else {
-            //Affichage des plats
-            System.out.println(produits);
-
+            //affichage de la liste
+            for (int j = 0; j < plats.size(); j++) {
+                System.out.println(plats.get(j));
+            }
             //Affichage du total de la commande
-            System.out.println("----------------------------------------------- \n Total de la commande: " + total_ticket + " €");
+            System.out.println("----------------------------------------------- \nTotal de la commande: " + total_ticket + " €");
         }
-
 
         // On ferme le scanner
         sc.close();
