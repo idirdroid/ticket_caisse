@@ -28,10 +28,6 @@ public class Main {
         // On déclare un scanner pour lire les entrées de la console
         Scanner sc = new Scanner(System.in);
 
-        //Combien de plat compose la commande, demande saisie utilisateur
-        System.out.println("Combien de plats composent la commande? ");
-        int nb_plat = sc.nextInt();
-        sc.nextLine();
 
         //On lance un boucle permettant de saisir plusieurs plat
         //Dans cette boucle on va demander l'intitulé du plat, la quantité et la prix unitaire
@@ -40,10 +36,14 @@ public class Main {
         //on stocke également les différentes occurences de plats pour affichage final
 
         int i = 0;
-        while (i < nb_plat) {
+        while (i == 0) {
             //Tant que le nombre de plat n'est pas atteint, on demande la saisie d'un nouveau plat
             System.out.println("Entrez l'intitulé du plat: ");
             plat = sc.nextLine();
+            if (plat == "") {
+                i++;
+                break;
+            }
 
             //Saisie de la quantité
             System.out.println("entrez la quantité commandée: ");
@@ -60,12 +60,9 @@ public class Main {
 
             //Calcul du total
             total_ticket = total_ticket + (prix_unitaire * quantite);
-            i++;
+
         }
 
-        //for (int j = 0; i < nb_plat; j++) {
-        //    System.out.println(produits[i]);
-        //}
 
         //Affichage des plats
         System.out.println(produits);
