@@ -12,6 +12,7 @@ public class Main {
         ArrayList<String> intitule_plat = new ArrayList<String>();
         ArrayList<Float> prix_produits = new ArrayList<Float>();
 
+        //Alimentation du référentiel produits
         intitule_plat.add("Lasagnes");
         intitule_plat.add("Entrcôte");
         intitule_plat.add("Pizza Saumon");
@@ -23,11 +24,10 @@ public class Main {
         prix_produits.add(2.5F);
 
 
-
         //Variable Total de l'adition
         float total_ticket=0;
 
-        //Utilisation de tableaux de type "Arraylist"
+        //Utilisation de tableaux de type "Arraylist" pour stocker les saisies
         ArrayList<String> plats = new ArrayList<String>();
         ArrayList<Integer> quantites = new ArrayList<Integer>();
         ArrayList<Float> prix_unitaires = new ArrayList<Float>();
@@ -39,9 +39,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
 
-        //On lance un boucle permettant de saisir plusieurs plat
-        //Dans cette boucle on va demander l'intitulé du plat, la quantité et la prix unitaire
-        //Une fois les informations stockées, on calcul le prix total du plat
+        //On lance un boucle permettant de choisir plusieurs plat
+        //Dans cette boucle on va demander le numéro du plat et la quantité. Le prix unitaire est récupéré automatiquement
+        //Une fois les informations stockées, on calcul le prix total du plat (de la ligne)
         //Cette information est additionnée à la variable total_ticket
         //on stocke également les différentes occurences de plats pour affichage final
 
@@ -53,13 +53,14 @@ public class Main {
                 System.out.println(l+": "+ intitule_plat.get(l) + " - " + prix_produits.get(l));
             }
 
-            //Tant que le nom du plat n'est pas vide, on continue la saisie
+            //Tant que le numéro du plat n'est pas vide, on continue la saisie
             System.out.println("Séléctionnez un plat: ");
             String index_temp = sc.nextLine();
 
             if (index_temp == "") {
                 break;
             }
+            //On transforme la saisie de l'utilisateur en integer pour l'utiliser comme index et récupérer les infos du référentiel
             int index = Integer.parseInt(index_temp);
             plats.add(intitule_plat.get(index));
 
@@ -68,10 +69,9 @@ public class Main {
             quantites.add(sc.nextInt());
             sc.nextLine();
 
-            //Saisie du prix unitaire
-            //System.out.println("Entrez le prix unitaire: ");
+            //Récupération du prix unitaire
             prix_unitaires.add(prix_produits.get(index));
-            //sc.nextLine();
+
 
             //Stockage du total prix unitaire par quantité
             prix_unitaires.set(i, prix_unitaires.get(i) * quantites.get(i));
