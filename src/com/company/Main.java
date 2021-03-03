@@ -22,10 +22,12 @@ public class Main {
 
         //Utilisation d'un tavleau de type liste
         ArrayList<String> plats = new ArrayList<String>();
+        ArrayList<Integer> quantites = new ArrayList<Integer>();
+        ArrayList<Float> prix_unitaires = new ArrayList<Float>();
 
         //Ajout de la ligne d'entête
-        plats.add("Quantité | Produit  | Prix total");
-        plats.add("-----------------------------------------------");
+        //plats.add("Quantité | Produit  | Prix total");
+        //plats.add("-----------------------------------------------");
 
         //Lancement du nouveau Ticket de caisse
         System.out.println("Nouveau Ticket de caisse.");
@@ -41,31 +43,32 @@ public class Main {
         //on stocke également les différentes occurences de plats pour affichage final
 
         int i = 0;
-        while (i == 0) {
+        while (i >= 0) {
             //Tant que le nombre de plat n'est pas atteint, on demande la saisie d'un nouveau plat
             System.out.println("Entrez l'intitulé du plat: ");
-            plat = sc.nextLine();
-            if (plat.equals("")) {
-                ++i;
+            plats.add(sc.nextLine());
+            if (plats.get(i).equals("")) {
                 break;
             }
 
             //Saisie de la quantité
             System.out.println("entrez la quantité commandée: ");
-            quantite = sc.nextInt();
+            quantites.add(sc.nextInt());
             sc.nextLine();
 
             //Saisie du prix unitaire
             System.out.println("Entrez le prix unitaire: ");
-            prix_unitaire = sc.nextFloat();
+            prix_unitaires.add(sc.nextFloat());
             sc.nextLine();
 
             //Stockage de la liste des produits
             //produits = produits + "\n X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €";
-            plats.add("X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €");
-
+            //plats.add("X" + quantite + "   " + plat + "   " + (prix_unitaire * quantite) + " €");
+            prix_unitaires.set(i, prix_unitaires.get(i) * quantites.get(i));
             //Calcul du total
-            total_ticket = total_ticket + (prix_unitaire * quantite);
+            total_ticket = total_ticket + prix_unitaires.get(i);
+
+            ++i;
 
         }
 
@@ -74,12 +77,15 @@ public class Main {
             System.out.println("Le Ticket est vide, abandon de l'impression");
         }
         else {
+            System.out.println("Ticket détaillé:\n-----------------------------------");
             //affichage de la liste
-            for (int j = 0; j < plats.size(); j++) {
-                System.out.println(plats.get(j));
+            for (int j = 0; j < quantites.size(); j++) {
+                System.out.print("X" + quantites.get(j) + " ");
+                System.out.printf("%-20s", plats.get(j));
+                System.out.printf("%10s %n", String.format("%.2f", prix_unitaires.get(j)) + "€");
             }
             //Affichage du total de la commande
-            System.out.println("----------------------------------------------- \nTotal de la commande: " + total_ticket + " €");
+            System.out.println("----------------------------------- \nTotal de la commande: " + String.format("%.2f", total_ticket) + " €");
         }
 
         // On ferme le scanner
