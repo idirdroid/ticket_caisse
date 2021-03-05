@@ -1,6 +1,9 @@
 package com.company;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -89,6 +92,11 @@ public class Main {
             System.out.println("Le Ticket est vide, abandon de l'impression");
         }
         else {
+            //préparation de la date
+            DateFormat formatage = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date_du_jour = new Date();
+            System.out.println("Date: " + formatage.format(date_du_jour));
+            System.out.println("---------------------------------------------");
             //affichage de la liste
             System.out.println("Ticket détaillé:\n---------------------------------------------");
             for (int j = 0; j < quantites.size(); j++) {
